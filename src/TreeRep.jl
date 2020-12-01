@@ -14,7 +14,7 @@ function gid(D,w,x,y)
     return 0.5*(D[w,x]+D[w,y]-D[x,y])
 end
 
-function metric_to_structure(d,p2,jj;increase = false)
+function metric_to_structure(d,p2=1,jj=1;increase = false)
     global n,_ = size(d)
     S = Int(floor(2*n))
     W = zeros(S,S)
