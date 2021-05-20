@@ -22,6 +22,8 @@ Note, the code uses FLoat64 matrices.
 
 - If slowing the code down is okay, you can try switching off multithreading and making the matrix on line 19 a sparse matrix, so spzeros(2n,2n).
 
+- If you get a StackOverFlow error, please increase stack size by ulimit -s unlimited (on Ubuntu this is the command)
+
 2) Run time issues
 
 - Check if you are using multiple threads with utilities.tm()
