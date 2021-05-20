@@ -36,3 +36,23 @@ Note, the code uses FLoat64 matrices.
 
 Please open a github issue. 
 
+
+Basic Example:
+
+If D is the matrix with the distances. Then
+  
+    G2, W2  = TreeRep.metric_to_structure(D,undef,undef)
+
+will return the tree structure G2 and the Weights W2. Now if D is n by n, then W2 will be 2n by 2n (unless changed as described above). Running 
+
+    B = W2[1:nv(G2),1:nv(G2)];
+    B = sparse(B);
+    B = (B .> 0) .* B;
+
+    D2 = utilities.parallel_dp_shortest_paths(G2, B,false)[1:n,1:n];
+    
+Will extract the new metric on the tree. 
+    
+    
+
+
