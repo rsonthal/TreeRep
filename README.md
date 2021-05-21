@@ -19,6 +19,12 @@ will return the tree structure G2 and the Weights W2. Now if D is n by n, then W
     
 Will extract the new metric on the tree. 
 
+----------
+
+There is also a python wrapper
+
+-----------
+
 TO REDUCE MEMORY USGAE: - On line 19 of TreeRep.jl change from 2n to some other fraction such as 1.2n or 1.5n or general fn for f > 1. This will siginificantly memory usage from 4n^2 to f^2n^2. However, if the learned tree doesnt fit in fn nodes (due to additional steiner nodes) this will cause a slow down of the method. 
 
 UNLESS you are optimizing for DISTORTION DO NOT use the optimization feature for TreeRep. This is very slow and may degrade other statistics such as MAP.
