@@ -57,5 +57,5 @@ Please open a github issue.
     
 --------
 
-full_taxonomy.csv is from https://www.who.int/standards/ classifications/classification-of-diseases
+full_taxonomy.csv is from https://www.who.int/standards/classifications/classification-of-diseases
 
