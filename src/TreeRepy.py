@@ -43,3 +43,29 @@ def TreeRep(d):
         W[dst,src] = Main.dist[dst,src]
 
     return W
+    
+def TreeRep_no_recursion(d):
+    """
+    This is a python wrapper to the TreeRep algorithm written in Julia.
+    
+    Input:
+    d - Distance matrix, assumed to be symmetric with 0 on the diagonal
+    Output:
+    W - Adjacenct matrix of the tree. Note that W may have rows/cols full of zeros, and they should be ignored.
+    Example Code:
+    d = np.array([[0,2,3],[2,0,2],[3,2,0]])
+    W = TreeRep(d)
+    print(W)
+    """
+    Main.d = d
+    Main.G,Main.dist = Main.eval("TreeRep.metric_to_structure_no_recursion(d)")
+
+    edges = Main.eval('collect(edges(G))')
+    W = np.zeros_like(Main.dist) # Initializing the adjacency matrix
+    for edge in edges:
+        src = edge.src-1 
+        dst = edge.dst-1
+        W[src,dst] = Main.dist[src,dst]
+        W[dst,src] = Main.dist[dst,src]
+
+    return W
