@@ -1,5 +1,5 @@
 # TreeRep
-This is a github repository containing the code for the paper: https://arxiv.org/abs/2005.03847 (now accepted at Neurips 2020). The code is written in Julia 1.1, but should be compatible upto julia 1.5
+This is a github repository containing the code for the paper: https://arxiv.org/abs/2005.03847 (now accepted at Neurips 2020). The code is written in Julia 1.1, but should be compatible upto julia 1.5. Please cite the relavent data sources. 
 
 Basic Example:
 
