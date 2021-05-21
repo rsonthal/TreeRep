@@ -457,8 +457,8 @@ function zone1_recurse(G,W,V, x; tol = 0.1, increase = false, check_cluster = fa
         return G,W
     end
     
-    #p = randperm(length(V)) 
-    p = sortperm(W[x,V], rev = true)
+    p = randperm(length(V)) 
+    #p = sortperm(W[x,V], rev = true)
     y = V[p[1]]
     z = V[p[2]]
     
@@ -676,8 +676,8 @@ function zone1_helper(G,W,V, x; tol = 0.1, increase = false, check_cluster = fal
         return G,W, []
     end
     
-    #p = randperm(length(V)) 
-    p = sortperm(W[x,V], rev = true)
+    p = randperm(length(V)) 
+    #p = sortperm(W[x,V], rev = true)
     y = V[p[1]]
     z = V[p[2]]
     
