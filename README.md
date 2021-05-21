@@ -9,7 +9,7 @@ If D is the matrix with the distances. Then
     
     G2, W2  = TreeRep.metric_to_structure_no_recursion(D,undef,undef)
 
-will return the tree structure G2 and the Weights W2. Now if D is n by n, then W2 will be 2n by 2n (unless changed as described above). Running 
+will return the tree structure G2 and the Weights W2. Now if D is n by n, then W2 will be 2n by 2n (unless changed as described below). Running 
 
     B = W2[1:nv(G2),1:nv(G2)];
     B = sparse(B);
