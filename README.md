@@ -1,6 +1,24 @@
 # TreeRep
 This is a github repository containing the code for the paper: https://arxiv.org/abs/2005.03847 (now accepted at Neurips 2020). The code is written in Julia 1.1, but should be compatible upto julia 1.5
 
+Basic Example:
+
+If D is the matrix with the distances. Then
+  
+    G2, W2  = TreeRep.metric_to_structure(D,undef,undef)
+    
+    G2, W2  = TreeRep.metric_to_structure_no_recursion(D,undef,undef)
+
+will return the tree structure G2 and the Weights W2. Now if D is n by n, then W2 will be 2n by 2n (unless changed as described above). Running 
+
+    B = W2[1:nv(G2),1:nv(G2)];
+    B = sparse(B);
+    B = (B .> 0) .* B;
+
+    D2 = utilities.parallel_dp_shortest_paths(G2, B,false)[1:n,1:n];
+    
+Will extract the new metric on the tree. 
+
 TO REDUCE MEMORY USGAE: - On line 19 of TreeRep.jl change from 2n to some other fraction such as 1.2n or 1.5n or general fn for f > 1. This will siginificantly memory usage from 4n^2 to f^2n^2. However, if the learned tree doesnt fit in fn nodes (due to additional steiner nodes) this will cause a slow down of the method. 
 
 UNLESS you are optimizing for DISTORTION DO NOT use the optimization feature for TreeRep. This is very slow and may degrade other statistics such as MAP.
@@ -24,7 +42,7 @@ Note, the code uses FLoat64 matrices.
 
 - If slowing the code down is okay, you can try switching off multithreading and making the matrix on line 19 a sparse matrix, so spzeros(2n,2n).
 
-- If you get a StackOverFlow error. One possible fix is to increase stack size by ulimit -s unlimited (on Ubuntu this is the command). If that doesnt work try calling metric_to_structure(...., check_cluster = true).* If that doesn't work try metric_to_structure_no_recursion.* 
+- If you get a StackOverFlow error. One possible fix is to increase stack size by ulimit -s unlimited (on Ubuntu this is the command). If that doesn't work try metric_to_structure_no_recursion.
 
 2) Run time issues
 
@@ -36,23 +54,6 @@ Note, the code uses FLoat64 matrices.
 
 Please open a github issue. 
 
-
-Basic Example:
-
-If D is the matrix with the distances. Then
-  
-    G2, W2  = TreeRep.metric_to_structure(D,undef,undef)
-
-will return the tree structure G2 and the Weights W2. Now if D is n by n, then W2 will be 2n by 2n (unless changed as described above). Running 
-
-    B = W2[1:nv(G2),1:nv(G2)];
-    B = sparse(B);
-    B = (B .> 0) .* B;
-
-    D2 = utilities.parallel_dp_shortest_paths(G2, B,false)[1:n,1:n];
-    
-Will extract the new metric on the tree. 
-    
     
 
 
