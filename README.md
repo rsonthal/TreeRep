@@ -1,6 +1,20 @@
 # TreeRep
 This is a github repository containing the code for the paper: https://arxiv.org/abs/2005.03847 (now accepted at Neurips 2020). The code is written in Julia 1.1, but should be compatible upto julia 1.5. Please cite the relavent data sources. 
 
+Please cite using:
+
+      @inproceedings{NEURIPS2020_093f65e0,
+       author = {Sonthalia, Rishi and Gilbert, Anna},
+       booktitle = {Advances in Neural Information Processing Systems},
+       editor = {H. Larochelle and M. Ranzato and R. Hadsell and M. F. Balcan and H. Lin},
+       pages = {845--856},
+       publisher = {Curran Associates, Inc.},
+       title = {Tree! I am no Tree! I am a low dimensional Hyperbolic Embedding},
+       url = {https://proceedings.neurips.cc/paper/2020/file/093f65e080a295f8076b1c5722a46aa2-Paper.pdf},
+       volume = {33},
+       year = {2020}
+      }
+
 Basic Example:
 
 If D is the matrix with the distances. Then
