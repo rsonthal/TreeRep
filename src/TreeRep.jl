@@ -14,7 +14,7 @@ function gid(D,w,x,y)
     return 0.5*(D[w,x]+D[w,y]-D[x,y])
 end
 
-function metric_to_structure(d,p2,jj;increase = false, check_cluster = false)
+function metric_to_structure(d,p2,jj;tol = 1e-5,increase = false, check_cluster = false)
     global n,_ = size(d)
     S = Int(floor(1.3*n))
     W = zeros(S,S)
@@ -33,7 +33,7 @@ function metric_to_structure(d,p2,jj;increase = false, check_cluster = false)
     
     global nextRoots = collect(2*n:-1:n+1)
     
-    G,W = recursive_step(G,W,V,x,y,z,1; increase = increase, check_cluster = check_cluster)
+    G,W = recursive_step(G,W,V,x,y,z,1; tol = tol, increase = increase, check_cluster = check_cluster)
 
     for i = 1:nv(G)
         if has_edge(G,i,i)
@@ -46,7 +46,7 @@ function metric_to_structure(d,p2,jj;increase = false, check_cluster = false)
     return G,W
 end
 
-function metric_to_structure_no_recursion(d,p2,jj;increase = false)
+function metric_to_structure_no_recursion(d,p2,jj;tol = 1e-5,increase = false)
     global n,_ = size(d)
     S = Int(floor(1.3*n))
     W = zeros(S,S)
@@ -65,7 +65,7 @@ function metric_to_structure_no_recursion(d,p2,jj;increase = false)
     
     global nextRoots = collect(2*n:-1:n+1)
     
-    G,W = helper_step(G,W,V,x,y,z,1)
+    G,W = helper_step(G,W,V,x,y,z,1; tol = tol)
 
     for i = 1:nv(G)
         if has_edge(G,i,i)
@@ -78,7 +78,7 @@ function metric_to_structure_no_recursion(d,p2,jj;increase = false)
     return G,W
 end
 
-function helper_step(G,W,V,x,y,z,ztype;tol = 0.1,increase = false, check_cluster = false)
+function helper_step(G,W,V,x,y,z,ztype;tol = 1e-5,increase = false, check_cluster = false)
     r = pop!(nextRoots)
     if r > size(W,1)
         W = hcat(W,zeros(size(W,1)))
@@ -232,7 +232,7 @@ function helper_step(G,W,V,x,y,z,ztype;tol = 0.1,increase = false, check_cluster
     return G,W
 end
 
-function metric_to_structure_re(d,mi,mj,p2,jj;increase = false, check_cluster = false)
+function metric_to_structure_re(d,mi,mj,p2,jj;tol = 1e-5,increase = false, check_cluster = false)
     global n,_ = size(d)
     S = Int(floor(2*n))
     W = zeros(S,S)
@@ -256,7 +256,7 @@ function metric_to_structure_re(d,mi,mj,p2,jj;increase = false, check_cluster = 
     
     global nextRoots = collect(2*n:-1:n+1)
     
-    G,W = recursive_step(G,W,V,x,y,z,1; increase = increase, check_cluster = check_cluster)
+    G,W = recursive_step(G,W,V,x,y,z,1;tol = 1e-5, increase = increase, check_cluster = check_cluster)
 
     for i = 1:nv(G)
         if has_edge(G,i,i)
@@ -269,7 +269,7 @@ function metric_to_structure_re(d,mi,mj,p2,jj;increase = false, check_cluster = 
     return G,W
 end
 
-function recursive_step(G,W,V,x,y,z,ztype;tol = 0.1,increase = false, check_cluster = false)
+function recursive_step(G,W,V,x,y,z,ztype;tol = 1e-5,increase = false, check_cluster = false)
     r = pop!(nextRoots)
     if r > size(W,1)
         W = hcat(W,zeros(size(W,1)))
@@ -445,7 +445,7 @@ function is_cluster2(W,V,r)
     return true
 end
 
-function zone1_recurse(G,W,V, x; tol = 0.1, increase = false, check_cluster = false)
+function zone1_recurse(G,W,V, x; tol = 1e-5, increase = false, check_cluster = false)
     nl = 0
     ztype = 1 
     if length(V) == 0
@@ -664,7 +664,7 @@ function zone1_recurse(G,W,V, x; tol = 0.1, increase = false, check_cluster = fa
     
 end
         
-function zone1_helper(G,W,V, x; tol = 0.1, increase = false, check_cluster = false)
+function zone1_helper(G,W,V, x; tol = 1e-5, increase = false, check_cluster = false)
     nl = 0
     ztype = 1 
     if length(V) == 0
@@ -856,7 +856,7 @@ function zone1_helper(G,W,V, x; tol = 0.1, increase = false, check_cluster = fal
     return G,W,[(R1p,1,r,r),(X1p,1,x,x),(Y1p,1,y,y),(Z1p,1,z,z),(X2p,2,x,r),(Y2p,2,y,r),(Z2p,2,z,r)]
 end
 
-function zone2_recurse(G,W,V,x,y;tol = 0.1,increase = false, check_cluster = false)
+function zone2_recurse(G,W,V,x,y;tol = 1e-5,increase = false, check_cluster = false)
     nl = 0
     ztype = 2
     if length(V) == 0
@@ -1051,7 +1051,7 @@ function zone2_recurse(G,W,V,x,y;tol = 0.1,increase = false, check_cluster = fal
 end
 
         
-function zone2_helper(G,W,V,x,y;tol = 0.1,increase = false, check_cluster = false)
+function zone2_helper(G,W,V,x,y;tol = 1e-5,increase = false, check_cluster = false)
     nl = 0
     ztype = 2
     if length(V) == 0
