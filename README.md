@@ -70,7 +70,11 @@ Note, the code uses FLoat64 matrices.
 
 - If the utilities.parallel_dp_shortest_paths(g,adjacency_matrix(g)) is slow this is because the D'esopo pape algorithm is usually fast, but sometimes could take exponential time (https://cp-algorithms.com/graph/desopo_pape.html). Try using one of the other shortest path algorithms instead from the LightGraphs package https://juliagraphs.org/LightGraphs.jl/latest/parallel/. 
 
-3) Other
+5) Incorrect/bad tree.
+
+- Check if the distances and the tolerance used are conflicting. That is, the tolerance should be smaller than that the distances. 
+
+4) Other
 
 Please open a github issue. 
 
