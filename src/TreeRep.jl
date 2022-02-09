@@ -198,7 +198,7 @@ function helper_step(G,W,V,x,y,z,ztype;tol = 1e-5,increase = false, check_cluste
             W[w,r] = a
             W[r,w] = a
         elseif b == maximum([a,b,c])
-            if abs(W[w,z] - a) < tol || abs(W[w,z] - c) < tol
+            if abs(W[w,x] - a) < tol || abs(W[w,x] - c) < tol
                 push!(X1,w)
             else
                 push!(X2,w)
@@ -206,7 +206,7 @@ function helper_step(G,W,V,x,y,z,ztype;tol = 1e-5,increase = false, check_cluste
             W[w,r] = b
             W[r,w] = b
         elseif c == maximum([a,b,c])
-            if abs(W[w,z] - b) < tol || abs(W[w,z] - a) < tol
+            if abs(W[w,y] - b) < tol || abs(W[w,y] - a) < tol
                 push!(Y1,w)
             else
                 push!(Y2,w)
@@ -389,7 +389,7 @@ function recursive_step(G,W,V,x,y,z,ztype;tol = 1e-5,increase = false, check_clu
             W[w,r] = a
             W[r,w] = a
         elseif b == maximum([a,b,c])
-            if abs(W[w,z] - a) < tol || abs(W[w,z] - c) < tol
+            if abs(W[w,x] - a) < tol || abs(W[w,x] - c) < tol
                 push!(X1,w)
             else
                 push!(X2,w)
@@ -397,7 +397,7 @@ function recursive_step(G,W,V,x,y,z,ztype;tol = 1e-5,increase = false, check_clu
             W[w,r] = b
             W[r,w] = b
         elseif c == maximum([a,b,c])
-            if abs(W[w,z] - b) < tol || abs(W[w,z] - a) < tol
+            if abs(W[w,y] - b) < tol || abs(W[w,y] - a) < tol
                 push!(Y1,w)
             else
                 push!(Y2,w)
@@ -603,7 +603,7 @@ function zone1_recurse(G,W,V, x; tol = 1e-5, increase = false, check_cluster = f
             W[w,r] = a
             W[r,w] = a
         elseif b == maximum([a,b,c])
-            if abs(W[w,z] - a) < tol || abs(W[w,z] - c) < tol
+            if abs(W[w,x] - a) < tol || abs(W[w,x] - c) < tol
                 push!(X1[Threads.threadid()],w)
             else
                 push!(X2[Threads.threadid()],w)
@@ -611,7 +611,7 @@ function zone1_recurse(G,W,V, x; tol = 1e-5, increase = false, check_cluster = f
             W[w,r] = b
             W[r,w] = b
         elseif c == maximum([a,b,c])
-            if abs(W[w,z] - b) < tol || abs(W[w,z] - a) < tol
+            if abs(W[w,y] - b) < tol || abs(W[w,y] - a) < tol
                 push!(Y1[Threads.threadid()],w)
             else
                 push!(Y2[Threads.threadid()],w)
@@ -812,7 +812,7 @@ function zone1_helper(G,W,V, x; tol = 1e-5, increase = false, check_cluster = fa
             W[w,r] = a
             W[r,w] = a
         elseif b == maximum([a,b,c])
-            if abs(W[w,z] - a) < tol || abs(W[w,z] - c) < tol
+            if abs(W[w,x] - a) < tol || abs(W[w,x] - c) < tol
                 push!(X1[Threads.threadid()],w)
             else
                 push!(X2[Threads.threadid()],w)
@@ -820,7 +820,7 @@ function zone1_helper(G,W,V, x; tol = 1e-5, increase = false, check_cluster = fa
             W[w,r] = b
             W[r,w] = b
         elseif c == maximum([a,b,c])
-            if abs(W[w,z] - b) < tol || abs(W[w,z] - a) < tol
+            if abs(W[w,y] - b) < tol || abs(W[w,y] - a) < tol
                 push!(Y1[Threads.threadid()],w)
             else
                 push!(Y2[Threads.threadid()],w)
@@ -997,7 +997,7 @@ function zone2_recurse(G,W,V,x,y;tol = 1e-5,increase = false, check_cluster = fa
             W[w,r] = a
             W[r,w] = a
         elseif b == maximum([a,b,c])
-            if abs(W[w,z] - a) < tol || abs(W[w,z] - c) < tol
+            if abs(W[w,x] - a) < tol || abs(W[w,x] - c) < tol
                 push!(X1[Threads.threadid()],w)
             else
                 push!(X2[Threads.threadid()],w)
@@ -1005,7 +1005,7 @@ function zone2_recurse(G,W,V,x,y;tol = 1e-5,increase = false, check_cluster = fa
             W[w,r] = b
             W[r,w] = b
         elseif c == maximum([a,b,c])
-            if abs(W[w,z] - b) < tol || abs(W[w,z] - a) < tol
+            if abs(W[w,y] - b) < tol || abs(W[w,y] - a) < tol
                 push!(Y1[Threads.threadid()],w)
             else
                 push!(Y2[Threads.threadid()],w)
@@ -1192,7 +1192,7 @@ function zone2_helper(G,W,V,x,y;tol = 1e-5,increase = false, check_cluster = fal
             W[w,r] = a
             W[r,w] = a
         elseif b == maximum([a,b,c])
-            if abs(W[w,z] - a) < tol || abs(W[w,z] - c) < tol
+            if abs(W[w,x] - a) < tol || abs(W[w,x] - c) < tol
                 push!(X1[Threads.threadid()],w)
             else
                 push!(X2[Threads.threadid()],w)
@@ -1200,7 +1200,7 @@ function zone2_helper(G,W,V,x,y;tol = 1e-5,increase = false, check_cluster = fal
             W[w,r] = b
             W[r,w] = b
         elseif c == maximum([a,b,c])
-            if abs(W[w,z] - b) < tol || abs(W[w,z] - a) < tol
+            if abs(W[w,y] - b) < tol || abs(W[w,y] - a) < tol
                 push!(Y1[Threads.threadid()],w)
             else
                 push!(Y2[Threads.threadid()],w)
