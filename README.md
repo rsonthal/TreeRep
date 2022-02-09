@@ -31,11 +31,11 @@ will return the tree structure G2 and the Weights W2. Now if D is n by n, then W
 
     D2 = utilities.parallel_dp_shortest_paths(G2, B,false)[1:n,1:n];
     
-Will extract the new metric on the tree. 
+Will extract the new metric on the tree. There is also a python wrapper for the julia code. 
 
 ----------
 
-There is also a python wrapper
+**There is also a native python version using pytorch and networkx in the python version folder. That folder also has an example for how to use that code.** 
 
 -----------
 
