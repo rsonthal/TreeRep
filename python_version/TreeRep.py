@@ -23,13 +23,15 @@ class TreeRep():
     to the input metric. That is d[i,j] is the distance
     between the ith and the jth data point. 
     Required
+
+  theta : n x p tensor. p is the dimension of embeddings. 
   
   tol : float
     If any distances in the output tree are smaller than
     tol then we round the distances to 0. 
     Optional, default = 1e-5
   """
-  def __init__(self, d, tol = 1e-5):
+  def __init__(self, d, theta = None, tol = 1e-5):
     if type(d) == np.ndarray:
       self.d = torch.tensor(d)
     else:
@@ -42,6 +44,10 @@ class TreeRep():
     self.G = nx.Graph()
     self.G.add_nodes_from(range(self.n))
     self.debug = False
+    if theta != None:
+      self.theta = torch.cat((theta, torch.zeros_like(theta)), dim=0)
+    else:
+      self.theta = torch.zeros(2*self.n,1)
 
 
   """
@@ -103,6 +109,7 @@ class TreeRep():
 
       self.G.remove_node(r)
       self.nextroots.append(r)
+      self.theta[r,:] = 0
 
       self.G.add_edge(a,b)
       self.G.add_edge(a,c)
@@ -144,6 +151,7 @@ class TreeRep():
           self.G.remove_edge(z,r)
 
           self.G.remove_node(r)
+          self.theta[r,:] = 0
 
           self.nextroots.append(r)
           r = w
@@ -185,6 +193,7 @@ class TreeRep():
 
   def add_steiner_node(self,x,y,z):
     r = self.nextroots.pop(-1)
+    self.theta[r,:] = (self.theta[x,:] + self.theta[y,:] + self.theta[z,:])/3
 
     #check if we need to make W bigger
     if r >= self.S:
