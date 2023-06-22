@@ -197,7 +197,7 @@ class TreeRep():
 
     #check if we need to make W bigger
     if r >= self.S:
-      new_s = int(1.3*self.S)
+      new_s = int(1.3*self.S)+1
       new_w = torch.zeros(new_s,new_s)
       new_w[:self.S,:self.S] = self.W
       self.S = new_s
