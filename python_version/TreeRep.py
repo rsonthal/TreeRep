@@ -229,6 +229,10 @@ class TreeRep():
     if not replaced_root:
       replaced_root, r = self.contract_ra(r,z,x,y,[x, y, z])
 
+    if not replaced_root:
+      Z = (-self.W[r,x]).exp()+(-self.W[r,y]).exp()+(-self.W[r,z]).exp()
+      self.theta[r,:] = ((-self.W[r,x]).exp()*self.theta[x,:] + (-self.W[r,y]).exp()*self.theta[y,:] + (-self.W[r,z]).exp()*self.theta[z,:])/Z
+
     return replaced_root, r
 
   def zone1_helper(self,V,x):
